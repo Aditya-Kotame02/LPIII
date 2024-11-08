@@ -1,0 +1,30 @@
+# Recursive function to calculate Fibonacci number
+def fibonacci(n):
+    if n <= 1:
+        return n
+    return fibonacci(n - 1) + fibonacci(n - 2)
+
+# Function to calculate Fibonacci number and count the steps
+def fibonacci_with_count(n):
+    # Define a helper function that counts recursive calls
+    def fibonacci_count(n):
+        nonlocal count  # Use the outer variable count
+        count += 1      # Increment the count for each recursive call
+        if n <= 1:
+            return n
+        return fibonacci_count(n - 1) + fibonacci_count(n - 2)
+
+    count = 0  # Initialize count
+    fib_number = fibonacci_count(n)  # Calculate Fibonacci number with step counting
+    return fib_number, count
+
+# Take input from the user
+try:
+    n = int(input("Enter a number to find its Fibonacci and step count: "))
+    if n < 0:
+        print("Please enter a non-negative integer.")
+    else:
+        fib_number, steps = fibonacci_with_count(n)
+        print(f"Fibonacci({n}) = {fib_number}, Step Count = {steps}")
+except ValueError:
+    print("Invalid input. Please enter an integer.")
